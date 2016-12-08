@@ -25,11 +25,14 @@ Example:
      'status': 200,
      'user_agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
 """
+from __future__ import unicode_literals
+
 import re
 import datetime
 
 from dateutil.tz import tzoffset, tzutc
 import pytz
+import six
 
 
 # Regexes to match the 3 types of tokens we'll be parsing from the log files.
@@ -83,7 +86,7 @@ class QuotedStringToken(Token):
             }[simple]
 
         # Unescape a hex encoded char
-        return chr(int(hexcode, 16))
+        return six.unichr(int(hexcode, 16))
 
 
 quoted_string_token = QuotedStringToken()
